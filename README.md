@@ -78,6 +78,13 @@ pm.test("Name Validation", function(){
 pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
 });
+```
+#### Get All Products    
+```bash   
+// Expected status code and response status code same or not
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
 ```  
 
 # Create Test Suites   
