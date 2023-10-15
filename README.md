@@ -11,10 +11,9 @@ This document explains how to run API tests with Postman against restful APIs.
       
 
 # Summery    
-I have Completed effective API tests of a Product ordering site.   
-https://shop-api.ahmedmanan.com/doc/     
+I have Completed effective API tests of a Product ordering site.       
 <p align="center">
-  <img src="" />
+https://shop-api.ahmedmanan.com/docs/   
 </p>
  
 
