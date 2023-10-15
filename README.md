@@ -63,6 +63,21 @@ pm.test("Email Validation", function(){
 pm.test("Status code is 200", function () {
     pm.response.to.have.status(200);
 });
+```
+#### Create A Product    
+```bash   
+var jsonData = pm.response.json()
+
+// environment name and response name same or not
+pm.test("Name Validation", function(){
+    pm.expect(jsonData.data.relationships.seller).to.equal(pm.environment.get("name"));
+});
+
+
+// Expected status code and response status code same or not
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
 ```  
 
 # Create Test Suites   
