@@ -32,30 +32,31 @@ https://nodejs.org/en/
 # Assertions Details    
 #### Register User         
 ```bash
-// set environment UserID
-var jsonData = pm.response.json();
-pm.environment.set("userID", jsonData.userID);
+var jsonData = pm.response.json()
 
-// environment Email and actual Email same or not
-pm.test("Test Email", function () {
-pm.expect(jsonData.email).to.eql(pm.environment.get("email"));
-});
+// set environment token
+pm.environment.set("token", jsonData.data.token)
 
 // Expected status code and response status code same or not
 pm.test("Status code is 200", function () {
-pm.response.to.have.status(200);
-});     
+    pm.response.to.have.status(200);
+});
 ```
 #### Login    
 ```bash   
+var jsonData = pm.response.json()
+
 // set environment token
-var jsonData = pm.response.json();
-pm.environment.set("token", jsonData.token);
+pm.environment.set("token", jsonData.data.token)
 
+// environment name and actual name same or not
+pm.test("Name Validation", function(){
+    pm.expect(jsonData.data.user.name).to.equal(pm.environment.get("name"));
+});
 
-// environment token and actual token same or not
-pm.test("Test Token", function () {
-    pm.expect(jsonData.token).to.eql(pm.environment.get("token"));
+// environment email and actual email same or not
+pm.test("Email Validation", function(){
+    pm.expect(jsonData.data.user.name).to.equal(pm.environment.get("email"));
 });
 
 // Expected status code and response status code same or not
