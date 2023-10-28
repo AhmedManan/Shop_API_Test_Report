@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "bea606e0-fd49-4202-8a40-7f17a2c558a7",
 		"name": "Shop_API_Manan_Ahmed_Broti",
-		"description": "The API is available at `https://shop-api.ahmedmanan.com`",
+		"description": "The API is available at `https://shop-api.ahmedmanan.com`\n\nDeveloper Credit: [Manan Ahmed Broti](https://ahmedmanan.com/)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "23708981"
 	},
@@ -781,12 +781,12 @@
 						},
 						{
 							"key": "buyer_mobileno",
-							"value": "01748868061",
+							"value": "01768568063",
 							"type": "text"
 						},
 						{
 							"key": "buyer_address",
-							"value": "Manan 1234",
+							"value": "Road 7, Block D, Bashundhara R/A, Dhaka",
 							"type": "text"
 						},
 						{
