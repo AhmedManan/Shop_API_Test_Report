@@ -1,0 +1,1271 @@
+{
+	"info": {
+		"_postman_id": "bea606e0-fd49-4202-8a40-7f17a2c558a7",
+		"name": "Shop_API_Manan_Ahmed_Broti",
+		"description": "The API is available at `https://shop-api.ahmedmanan.com`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23708981"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// set environment token\r",
+							"pm.environment.set(\"token\", jsonData.data.token)\r",
+							"\r",
+							"// set user id\r",
+							"pm.environment.set(\"user_id\", jsonData.data.user.id)\r",
+							"\r",
+							"// set user name\r",
+							"pm.environment.set(\"user_name\", jsonData.data.user.name)\r",
+							"\r",
+							"// set user email\r",
+							"pm.environment.set(\"user_email\", jsonData.data.user.email)\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var name = pm.variables.replaceIn(\"{{$randomFullName}}\")\r",
+							"console.log(\"Name :\"+name)\r",
+							"pm.environment.set(\"name\", name)\r",
+							"\r",
+							"var email = pm.variables.replaceIn(\"{{$randomFirstName}}@gmail.com\")\r",
+							"console.log(\"Email :\"+email)\r",
+							"pm.environment.set(\"email\", email)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"name\": \"{{name}}\",\r\n \"email\": \"{{email}}\",\r\n \"password\": \"password\",\r\n \"password_confirmation\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/register",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// set environment token\r",
+							"pm.environment.set(\"token\", jsonData.data.token)\r",
+							"\r",
+							"// environment name and actual name same or not\r",
+							"pm.test(\"Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.user.name).to.equal(pm.environment.get(\"name\"));\r",
+							"});\r",
+							"\r",
+							"// environment email and actual email same or not\r",
+							"pm.test(\"Email Validation\", function(){\r",
+							"    pm.expect(jsonData.data.user.email).to.equal(pm.environment.get(\"email\"));\r",
+							"});\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/vnd.api+json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Content-type",
+						"value": "application/vnd.api+json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "{{email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/login",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var price = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Product Price :\"+price)\r",
+							"pm.environment.set(\"product_price\", price)\r",
+							"\r",
+							"var quantity = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Product Quantity :\"+quantity)\r",
+							"pm.environment.set(\"product_quantity\", quantity)\r",
+							"\r",
+							"var description = pm.variables.replaceIn(\"{{$randomLoremText}}\")\r",
+							"console.log(\"Product Description :\"+description)\r",
+							"pm.environment.set(\"product_description\", description)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// set product id in environment\r",
+							"pm.environment.set(\"product_id\", jsonData.data.id)\r",
+							"\r",
+							"// set product name in environment\r",
+							"pm.environment.set(\"product_name\", jsonData.data.attributes.name)\r",
+							"\r",
+							"// set product category in environment\r",
+							"pm.environment.set(\"product_category\", jsonData.data.attributes.category)\r",
+							"\r",
+							"// set product quantity in environment\r",
+							"pm.environment.set(\"product_quantity\", jsonData.data.attributes.quantity)\r",
+							"\r",
+							"// set product picture in environment\r",
+							"pm.environment.set(\"product_pic\", jsonData.data.attributes.product_pic)\r",
+							"\r",
+							"// set product seller id in environment\r",
+							"pm.environment.set(\"seller_id\", jsonData.data.relationships.seller_id)\r",
+							"\r",
+							"// set product seller in environment\r",
+							"pm.environment.set(\"seller\", jsonData.data.relationships.seller)\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// environment product price and response price same or not\r",
+							"pm.test(\"Product Price Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.price).to.equal(pm.environment.get(\"product_price\"));\r",
+							"});\r",
+							"\r",
+							"// environment product price and response price same or not\r",
+							"pm.test(\"Product Quantity Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.quantity).to.equal(pm.environment.get(\"product_quantity\"));\r",
+							"});\r",
+							"\r",
+							"// environment name and response name same or not\r",
+							"pm.test(\"Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.relationships.seller).to.equal(pm.environment.get(\"name\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "product 1",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "{{product_description}}",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "{{product_quantity}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{product_price}}",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "electronics",
+							"type": "text"
+						},
+						{
+							"key": "product_pic",
+							"type": "file",
+							"src": "/C:/Users/Ahmed/Desktop/61H90ZSoQqL.SS700.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Check the created product is listed or not\r",
+							"pm.test(\"Product Validation Complete\", function () {\r",
+							"    for (var i = 0; i < jsonData.data.length; i++) {\r",
+							"        if(jsonData.data[i].id== pm.environment.get(\"product_id\")){\r",
+							"            pm.test(\"Product ID Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].id).to.equal(pm.environment.get(\"product_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Name Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Description Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.description).to.equal(pm.environment.get(\"product_description\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Category Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.category).to.equal(pm.environment.get(\"product_category\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Quantity Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.quantity).to.equal(pm.environment.get(\"product_quantity\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Price Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.price).to.equal(pm.environment.get(\"product_price\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Product Picture Founded In The List\", function(){\r",
+							"            pm.expect(jsonData.data[i].attributes.product_pic).to.equal(pm.environment.get(\"product_pic\"));\r",
+							"            });\r",
+							"        }\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{base_url}}/products",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Product Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// environment product name and actual name same or not\r",
+							"pm.test(\"Product Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"});\r",
+							"\r",
+							"// environment product description and actual description same or not\r",
+							"pm.test(\"Product Description Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"});\r",
+							"\r",
+							"// environment product category and actual category same or not\r",
+							"pm.test(\"Product Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"});\r",
+							"\r",
+							"// environment product price and actual price same or not\r",
+							"pm.test(\"Product Price Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.price).to.equal(pm.environment.get(\"product_price\"));\r",
+							"});\r",
+							"\r",
+							"// environment product quantity and actual quantity same or not\r",
+							"pm.test(\"Product Quantity Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.quantity).to.equal(pm.environment.get(\"product_quantity\"));\r",
+							"});\r",
+							"\r",
+							"// environment product picture and actual quantity same or not\r",
+							"pm.test(\"Product Picture Validation\", function(){\r",
+							"    pm.expect(jsonData.data.attributes.product_pic).to.equal(pm.environment.get(\"product_pic\"));\r",
+							"});\r",
+							"\r",
+							"// environment product picture and actual quantity same or not\r",
+							"pm.test(\"Product Seller ID Validation\", function(){\r",
+							"    pm.expect(jsonData.data.relationships.seller_id).to.equal(pm.environment.get(\"seller_id\"));\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products/{{product_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Product Pic",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var headers = pm.response.headers;\r",
+							"var contentType = headers.get('Content-Type');\r",
+							"\r",
+							"pm.test('Response contains a photo', function () {\r",
+							"    pm.expect(contentType).to.include('image');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/product-pics/{{product_pic}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"product-pics",
+						"{{product_pic}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update A Product",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var price = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Product Price :\"+price)\r",
+							"pm.environment.set(\"product_price\", price)\r",
+							"\r",
+							"var quantity = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Product Quantity :\"+quantity)\r",
+							"pm.environment.set(\"product_quantity\", quantity)\r",
+							"\r",
+							"var description = pm.variables.replaceIn(\"{{$randomLoremText}}\")\r",
+							"console.log(\"Product Description :\"+description)\r",
+							"pm.environment.set(\"product_description\", description)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Check the product is updated or not\r",
+							"pm.test(\"Product Update Complete\", function () {\r",
+							"\r",
+							"        pm.test(\"Product ID Validation\", function(){\r",
+							"            pm.expect(jsonData.data.id).to.equal(pm.environment.get(\"product_id\"));\r",
+							"        });\r",
+							"\r",
+							"        pm.test(\"Product Name Validation\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"        });\r",
+							"\r",
+							"        pm.test(\"Product Description Validation\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.description).to.equal(pm.environment.get(\"product_description\"));\r",
+							"        });\r",
+							"\r",
+							"        pm.test(\"Product Category Validation\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.category).to.equal(pm.environment.get(\"product_category\"));\r",
+							"        });\r",
+							"\r",
+							"        pm.test(\"Product Quantity Update\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.quantity).to.equal(pm.environment.get(\"product_quantity\"));\r",
+							"        });\r",
+							"\r",
+							"        pm.test(\"Product Price Update\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.price).to.equal(pm.environment.get(\"product_price\"));\r",
+							"            });\r",
+							"\r",
+							"        pm.test(\"Product Picture Validation\", function(){\r",
+							"            pm.expect(jsonData.data.attributes.product_pic).to.equal(pm.environment.get(\"product_pic\"));\r",
+							"            });\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "description",
+							"value": "{{product_description}}",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "{{product_category}}",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "{{product_quantity}}",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "{{product_price}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "{{product_name}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/products/{{product_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// set order id in environment\r",
+							"pm.environment.set(\"order_id\", jsonData.data.id)\r",
+							"\r",
+							"// set order price in environment\r",
+							"pm.environment.set(\"order_price\", jsonData.data.order.order_price)\r",
+							"\r",
+							"// set order status in environment\r",
+							"pm.environment.set(\"order_status\", jsonData.data.order.order_status)\r",
+							"\r",
+							"// set order notes in environment\r",
+							"pm.environment.set(\"order_notes\", jsonData.data.order.order_notes)\r",
+							"\r",
+							"// set order notes in environment\r",
+							"pm.environment.set(\"order_priority\", jsonData.data.order.order_priority)\r",
+							"\r",
+							"// set buyer id in environment\r",
+							"pm.environment.set(\"buyer_id\", jsonData.data.buyer.buyer_id)\r",
+							"\r",
+							"// set buyer name in environment\r",
+							"pm.environment.set(\"buyer_name\", jsonData.data.buyer.buyer_name)\r",
+							"\r",
+							"// set buyer mobile number in environment\r",
+							"pm.environment.set(\"buyer_mobileno\", jsonData.data.buyer.buyer_mobileno)\r",
+							"\r",
+							"// set buyer address number in environment\r",
+							"pm.environment.set(\"buyer_address\", jsonData.data.buyer.buyer_address)\r",
+							"\r",
+							"// set billing type in environment\r",
+							"pm.environment.set(\"billing_type\", jsonData.data.billing.billing_type)\r",
+							"\r",
+							"// set billing status in environment\r",
+							"pm.environment.set(\"billing_status\", jsonData.data.billing.billing_status)\r",
+							"\r",
+							"// set billing discount in environment\r",
+							"pm.environment.set(\"discount\", jsonData.data.billing.discount)\r",
+							"\r",
+							"// set order quantity in environment\r",
+							"pm.environment.set(\"order_quantity\", jsonData.data.product.product_quantity)\r",
+							"\r",
+							"// update product quantity in environment\r",
+							"pm.environment.set(\"product_quantity\", (pm.environment.get(\"product_quantity\")-jsonData.data.product.product_quantity))\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// environment product name and response name same or not\r",
+							"pm.test(\"Product ID Validation\", function(){\r",
+							"    pm.expect(jsonData.data.product.product_id).to.equal(pm.environment.get(\"product_id\"));\r",
+							"});\r",
+							"\r",
+							"// environment product name and response name same or not\r",
+							"pm.test(\"Product Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.product.product_name).to.equal(pm.environment.get(\"product_name\"));\r",
+							"});\r",
+							"\r",
+							"// environment product name and response name same or not\r",
+							"pm.test(\"Product Order Quantity Validation\", function(){\r",
+							"    pm.expect(jsonData.data.product.product_quantity)<=(pm.environment.get(\"product_quantity\"));\r",
+							"});\r",
+							"\r",
+							"// environment product seller id and response seller id same or not\r",
+							"pm.test(\"Product Buyer ID Validation\", function(){\r",
+							"    pm.expect(jsonData.data.buyer.buyer_id).to.equal(pm.environment.get(\"user_id\"));\r",
+							"});\r",
+							"\r",
+							"// environment product seller name and response seller name same or not\r",
+							"pm.test(\"Product Buyer Name Validation\", function(){\r",
+							"    pm.expect(jsonData.data.buyer.buyer_name).to.equal(pm.environment.get(\"buyer_name\"));\r",
+							"});\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"\r",
+							"const randomQuantity = Math.floor(Math.random() * 10) + 1;\r",
+							"var quantity = pm.variables.replaceIn(randomQuantity)\r",
+							"console.log(\"Order Quantity :\"+quantity)\r",
+							"pm.environment.set(\"order_quantity\", quantity)\r",
+							"\r",
+							"var notes = pm.variables.replaceIn(\"{{$randomLoremText}}\")\r",
+							"console.log(\"Order Notes :\"+notes)\r",
+							"pm.environment.set(\"order_notes\", notes)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "product_id",
+							"value": "{{product_id}}",
+							"type": "text"
+						},
+						{
+							"key": "product_name",
+							"value": "{{product_name}}",
+							"type": "text"
+						},
+						{
+							"key": "product_quantity",
+							"value": "{{order_quantity}}",
+							"type": "text"
+						},
+						{
+							"key": "buyer_id",
+							"value": "{{user_id}}",
+							"type": "text"
+						},
+						{
+							"key": "buyer_name",
+							"value": "{{name}}",
+							"type": "text"
+						},
+						{
+							"key": "buyer_mobileno",
+							"value": "01748868061",
+							"type": "text"
+						},
+						{
+							"key": "buyer_address",
+							"value": "Manan 1234",
+							"type": "text"
+						},
+						{
+							"key": "billing_status",
+							"value": "partial",
+							"type": "text"
+						},
+						{
+							"key": "billing_type",
+							"value": "Card",
+							"type": "text"
+						},
+						{
+							"key": "order_status",
+							"value": "delivered",
+							"type": "text"
+						},
+						{
+							"key": "order_notes",
+							"value": "{{order_notes}}",
+							"type": "text"
+						},
+						{
+							"key": "priority",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "discount",
+							"value": "0",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/orders",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Check the created product is listed or not\r",
+							"pm.test(\"Product Order Validation Complete\", function () {\r",
+							"    for (var i = 0; i < jsonData.data.length; i++) {\r",
+							"        if(jsonData.data[i].id== pm.environment.get(\"order_id\")){\r",
+							"            pm.test(\"Check Order ID\", function(){\r",
+							"            pm.expect(jsonData.data[i].id).to.equal(pm.environment.get(\"order_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Price\", function(){\r",
+							"            pm.expect(parseFloat(jsonData.data[i].order.order_price)).to.equal(parseFloat(pm.environment.get(\"order_price\")));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Order Status\", function(){\r",
+							"            pm.expect(jsonData.data[i].order.order_status).to.equal(pm.environment.get(\"order_status\"));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Order Notes\", function(){\r",
+							"            pm.expect(jsonData.data[i].order.order_notes).to.equal(pm.environment.get(\"order_notes\"));\r",
+							"            });\r",
+							"\r",
+							"            // pm.test(\"Order Priority Founded In The List\", function(){\r",
+							"            // pm.expect(jsonData.data[i].order.order_priority).to.equal(pm.environment.get(\"order_priority\"));\r",
+							"            // });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer ID\", function(){\r",
+							"            pm.expect(jsonData.data[i].buyer.buyer_id).to.equal(pm.environment.get(\"buyer_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Name\", function(){\r",
+							"            pm.expect(jsonData.data[i].buyer.buyer_name).to.equal(pm.environment.get(\"buyer_name\"));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Mobile Number\", function(){\r",
+							"            pm.expect(jsonData.data[i].buyer.buyer_mobileno).to.equal(pm.environment.get(\"buyer_mobileno\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Address\", function(){\r",
+							"            pm.expect(jsonData.data[i].buyer.buyer_address).to.equal(pm.environment.get(\"buyer_address\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Billing Type\", function(){\r",
+							"            pm.expect(jsonData.data[i].billing.billing_type).to.equal(pm.environment.get(\"billing_type\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Billing Status\", function(){\r",
+							"            pm.expect(jsonData.data[i].billing.billing_status).to.equal(pm.environment.get(\"billing_status\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Discount\", function(){\r",
+							"            pm.expect(parseFloat(jsonData.data[i].billing.discount)).to.equal(parseFloat(pm.environment.get(\"discount\")));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Product ID\", function(){\r",
+							"            pm.expect(jsonData.data[i].product.product_id).to.equal(pm.environment.get(\"product_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Quantity\", function(){\r",
+							"            pm.expect(jsonData.data[i].product.product_quantity).to.equal(pm.environment.get(\"order_quantity\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Seller ID\", function(){\r",
+							"            pm.expect(parseInt(jsonData.data[i].seller.seller_id)).to.equal(parseInt(pm.environment.get(\"seller_id\")));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Seller Name\", function(){\r",
+							"            pm.expect(jsonData.data[i].seller.seller).to.equal(pm.environment.get(\"seller\"));\r",
+							"            });\r",
+							"        }\r",
+							"    }\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/orders",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get A Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Check the created product is listed or not\r",
+							"pm.test(\"Product Order Validation Complete\", function () {\r",
+							"\r",
+							"            pm.test(\"Check Order ID\", function(){\r",
+							"            pm.expect(jsonData.data.id).to.equal(pm.environment.get(\"order_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Price\", function(){\r",
+							"            pm.expect(parseFloat(jsonData.data.order.order_price)).to.equal(parseFloat(pm.environment.get(\"order_price\")));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Order Status\", function(){\r",
+							"            pm.expect(jsonData.data.order.order_status).to.equal(pm.environment.get(\"order_status\"));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Order Notes\", function(){\r",
+							"            pm.expect(jsonData.data.order.order_notes).to.equal(pm.environment.get(\"order_notes\"));\r",
+							"            });\r",
+							"\r",
+							"            // pm.test(\"Order Priority Founded In The List\", function(){\r",
+							"            // pm.expect(jsonData.data[i].order.order_priority).to.equal(pm.environment.get(\"order_priority\"));\r",
+							"            // });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer ID\", function(){\r",
+							"            pm.expect(jsonData.data.buyer.buyer_id).to.equal(pm.environment.get(\"buyer_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Name\", function(){\r",
+							"            pm.expect(jsonData.data.buyer.buyer_name).to.equal(pm.environment.get(\"buyer_name\"));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Mobile Number\", function(){\r",
+							"            pm.expect(jsonData.data.buyer.buyer_mobileno).to.equal(pm.environment.get(\"buyer_mobileno\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Product Buyer Address\", function(){\r",
+							"            pm.expect(jsonData.data.buyer.buyer_address).to.equal(pm.environment.get(\"buyer_address\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Billing Type\", function(){\r",
+							"            pm.expect(jsonData.data.billing.billing_type).to.equal(pm.environment.get(\"billing_type\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Billing Status\", function(){\r",
+							"            pm.expect(jsonData.data.billing.billing_status).to.equal(pm.environment.get(\"billing_status\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Discount\", function(){\r",
+							"            pm.expect(parseFloat(jsonData.data.billing.discount)).to.equal(parseFloat(pm.environment.get(\"discount\")));\r",
+							"            });\r",
+							"\r",
+							"\r",
+							"            pm.test(\"Check Product ID\", function(){\r",
+							"            pm.expect(jsonData.data.product.product_id).to.equal(pm.environment.get(\"product_id\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Order Quantity\", function(){\r",
+							"            pm.expect(jsonData.data.product.product_quantity).to.equal(pm.environment.get(\"order_quantity\"));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Seller ID\", function(){\r",
+							"            pm.expect(parseInt(jsonData.data.seller.seller_id)).to.equal(parseInt(pm.environment.get(\"seller_id\")));\r",
+							"            });\r",
+							"\r",
+							"            pm.test(\"Check Seller Name\", function(){\r",
+							"            pm.expect(jsonData.data.seller.seller).to.equal(pm.environment.get(\"seller\"));\r",
+							"            });\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/orders/{{order_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update A Order",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var price = pm.variables.replaceIn(\"{{$randomInt}}\")\r",
+							"console.log(\"Order Price :\"+price)\r",
+							"pm.environment.set(\"order_price\", price)\r",
+							"\r",
+							"const randomQuantity = (Math.floor(Math.random() * 10) + 1);\r",
+							"console.log(\"Order Quantity: \" + randomQuantity);\r",
+							"pm.environment.set(\"order_quantity\", randomQuantity);\r",
+							"\r",
+							"var notes = pm.variables.replaceIn(\"{{$randomLoremText}}\")\r",
+							"console.log(\"Order Notes :\"+notes)\r",
+							"pm.environment.set(\"order_notes\", notes)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json()\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Order Notes\", function(){\r",
+							"    pm.expect(jsonData.data.order.order_notes).to.equal(pm.environment.get(\"order_notes\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check Order Quantity\", function(){\r",
+							"    pm.expect(parseInt(jsonData.data.product.product_quantity)).to.equal(pm.environment.get(\"order_quantity\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "order_notes",
+							"value": "{{order_notes}}",
+							"type": "text"
+						},
+						{
+							"key": "product_quantity",
+							"value": "{{order_quantity}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/orders/{{order_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"orders",
+						"{{order_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete A Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/products/{{product_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"products",
+						"{{product_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Expected status code and response status code same or not\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/logout",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
