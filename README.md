@@ -20,13 +20,13 @@ https://shop-api.ahmedmanan.com/docs/
 Here in this API new Products were ordered list of Products were viewed and different tests were performed like GET, POST, PUT, and DELETE.
 
 **Summary:** 
+     ![Test Summary](summary.png)
+
+Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of them passed with 0 skipped tests. The number of iterations is 3.
+
 <p align="center">
   The Live Report Can be visited from here: https://shop-api.ahmedmanan.com/report/   
 </p>
-<p align="center">
-     ![Test Summary](summary.png)
-</p>
-Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of them passed with 0 skipped tests. The number of iterations is 3.
 
 # Requirements   
 **Postman**   
