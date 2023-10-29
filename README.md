@@ -10,7 +10,7 @@ This document explains how to run API tests with Postman against restful APIs.
 - [Create Test Suites](create-test-suites)      
       
 
-# Summery    
+# Summary    
 I have Completed effective API tests of a Product ordering site.       
 <p align="center">
 https://shop-api.ahmedmanan.com/docs/   
@@ -19,9 +19,14 @@ https://shop-api.ahmedmanan.com/docs/
 
 Here in this API new Products were ordered list of Products were viewed and different tests were performed like GET, POST, PUT, and DELETE.
 
-**Summary:** Test Scripts 11 and a Total of 24 assertions were done. All of them passed with 0 skipped tests. The number of iterations is 1.
-
-
+**Summary:** 
+<p align="center">
+  The Live Report Can be visited from here: https://shop-api.ahmedmanan.com/report/   
+</p>
+<p align="center">
+     ![Test Summary](summary.png)
+</p>
+Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of them passed with 0 skipped tests. The number of iterations is 3.
 
 # Requirements   
 **Postman**   
