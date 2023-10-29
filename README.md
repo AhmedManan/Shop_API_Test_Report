@@ -1,122 +1,61 @@
 # Shop_API_Test_Report
-# Introduction
-This document explains how to run API tests with Postman against restful APIs.    
-# Content  
-- [Summary](summary)      
-- [Requirements](https://github.com/musthafiz/API-Testing#requirements)      
-- [Assertions Details](assertions-details)   
-  - [Register User](register-user)   
-  - [Login](login)   
-- [Create Test Suites](create-test-suites)      
-      
 
-# Summary    
-I have Completed effective API tests of a Product ordering site.       
-<p align="center">
-https://shop-api.ahmedmanan.com/docs/   
-</p>
- 
+## How to run this project
+- Clone this project
+- Open with Postman / Command Shell
+- Run Command:  
+```console 
+newman run Shop_API_Manan_Ahmed_Broti.postman_collection.json -e Shop_API_Manan_Ahmed_Broti.postman_environment.json
+```
+- Run Command for Report: 
+```console 
+newman run Shop_API_Manan_Ahmed_Broti.postman_collection.json -e Shop_API_Manan_Ahmed_Broti.postman_environment.json -r cli,htmlextra
+```
+- Run Command for Report With Iteration: 
+```console 
+newman run Shop_API_Manan_Ahmed_Broti.postman_collection.json -e Shop_API_Manan_Ahmed_Broti.postman_environment.json -n "number of iteration" -r cli,htmlextra
+```
 
-Here in this API new Products were ordered list of Products were viewed and different tests were performed like GET, POST, PUT, and DELETE.
+## Technology used:
+- Postman
+- Newman
 
-**Summary:** 
-     ![Test Summary](summary.png)
+## Prerequisite:
+- Jdk
+- Node Js
+- Newman
+- Html Report Library
+
+## Newman and Report Installation Process:
+- Newman Install Command:
+```console
+npm install -g newman
+```
+- Newman Html Report Install Command:
+```console
+npm install -g newman-reporter-htmlextra
+```
+## API Live Report:
+- https://shop-api.ahmedmanan.com/report
+
+## API Documentation:
+- [https://documenter.getpostman.com/view/13082503/2s93Xwz4Az](https://documenter.getpostman.com/view/23708981/2s9YRGy9ao)
+
+## Newman Report Summary:
+![Test Summary](summary.png)
 
 Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of them passed with 0 skipped tests. The number of iterations is 3.
 
-<p align="center">
-  The Live Report Can be visited from here: https://shop-api.ahmedmanan.com/report/   
-</p>
+## Test case list & Test Features:
+1. ### Registration
+    1. > Create Data Sets Using the Dynamic Random Variables.
+    2. > Generate authentication token
+    3. > Check status code
+    4. > Store dataset in the environment
 
-# Requirements   
-**Postman**   
-https://www.postman.com/   
-**Node JS**   
-https://nodejs.org/en/    
-
-# Assertions Details    
-#### Register User         
-```bash
-var jsonData = pm.response.json()
-
-// set environment token
-pm.environment.set("token", jsonData.data.token)
-
-// Expected status code and response status code same or not
-pm.test("Status code is 200", function () {
-    pm.response.to.have.status(200);
-});
-```
-#### Login    
-```bash   
-var jsonData = pm.response.json()
-
-// set environment token
-pm.environment.set("token", jsonData.data.token)
-
-// environment name and actual name same or not
-pm.test("Name Validation", function(){
-    pm.expect(jsonData.data.user.name).to.equal(pm.environment.get("name"));
-});
-
-// environment email and actual email same or not
-pm.test("Email Validation", function(){
-    pm.expect(jsonData.data.user.name).to.equal(pm.environment.get("email"));
-});
-
-// Expected status code and response status code same or not
-pm.test("Status code is 200", function () {
-    pm.response.to.have.status(200);
-});
-```
-#### Create A Product    
-```bash   
-var jsonData = pm.response.json()
-
-// environment name and response name same or not
-pm.test("Name Validation", function(){
-    pm.expect(jsonData.data.relationships.seller).to.equal(pm.environment.get("name"));
-});
-
-
-// Expected status code and response status code same or not
-pm.test("Status code is 201", function () {
-    pm.response.to.have.status(201);
-});
-```
-#### Get All Products    
-```bash   
-// Expected status code and response status code same or not
-pm.test("Status code is 200", function () {
-    pm.response.to.have.status(200);
-});
-```  
-
-# Create Test Suites   
-
-### Using Newman   
-
-
-  Newman is a command-line Collection Runner for Postman. It enables you to run and test a Postman Collection directly from the command line.
-#### Install Command    
-```bash
-npm install -g newman    
-```
-#### Run Command    
-- newman run “Path/CollectionName.json” -e Path/EnvironmentName.json
-- newman run “Collection Link” -e “Path”/EnvironmentName.json    
-
-#### Create HTML Report  
- 
-#### Install Command      
-```bash
-npm install -g newman-reporter-html
-```
-**or**   
-```bash
-npm install -g newman-reporter-htmlextra    
-```
-#### Run Command      
-- newman run “Collection Link” -e “Path”/EnvironmentName.json -r cli,html    
-**or**    
-- newman run “Collection Link” -e “Path”/EnvironmentName.json -r cli,htmlextra    
+3. ### Login
+	> In the test I have validated the following field values & checked those features:
+ 	1. > Email
+ 	2. > Password
+ 	3. > Generate Token
+ 	4. > Check status code
