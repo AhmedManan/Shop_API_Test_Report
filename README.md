@@ -48,14 +48,32 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
 
 ## Test case list & Test Features:
 1. ### Registration
-    1. > Create Data Sets Using the Dynamic Random Variables.
-    2. > Generate authentication token
-    3. > Check status code
-    4. > Store dataset in the environment
+   - &check; Create data sets using the dynamic random variables.
+   - &check; Generate authentication token
+   - &check; Check status code
+   - &check; Store the dataset in the environment
 
-3. ### Login
-	> In the test I have validated the following field values & checked those features:
- 	1. > Email
- 	2. > Password
- 	3. > Generate Token
- 	4. > Check status code
+2. ### Login
+	In the test I have validated the following field values & checked those features:
+ 	- &check; Email
+ 	- &check; Password
+ 	- &check; Generate token
+ 	- &check; Check status code
+3. ### Create A Product
+	In the test I have validated the following field values & checked those features:
+ 	- &check; Create data sets using dynamic random variables
+	- &check; Check status code
+ 	- &check; Product price validation
+ 	- &check; Product quantity validation
+ 	- &check; Product name validation
+	- &check; Store dataset in the environment
+ 3. ### Get all Products
+	In the test I have validated the following field values & checked those features:
+     	- &check; Check status code 
+ 	- &check; Check the product ID found in the list
+ 	- &check; Check the product name found in the list
+ 	- &check; Check the product description found in the list
+	- &check; Check the product category found in the list
+   	- &check; Check the product quantity found in the list
+    	<li>&check; Check the product price found in the list</li>
+     	<li>&check; Check the product picture found in the list</li>
