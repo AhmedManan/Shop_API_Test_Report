@@ -35,7 +35,7 @@ npm install -g newman
 ```console
 npm install -g newman-reporter-htmlextra
 ```
-## API Live Report:
+## Live API Test Report:
 - https://shop-api.ahmedmanan.com/report
 
 ## API Documentation:
@@ -63,13 +63,13 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
 3. ### Create A Product
 	In the test I have validated the following field values & checked those features:
  	- &check; Create data sets using dynamic random variables
-	- &check; Check status code
+	- &check; Check status code is 201 [created]
  	- &check; Product price validation
  	- &check; Product quantity validation
  	- &check; Product name validation
 	- &check; Store dataset in the environment
  
- 4. ### Get all products
+ 4. ### Get all products list
 	In the test I have validated the following field values & checked those features:
  	- &check; Check status code 
  	- &check; Check the product ID found in the list
@@ -80,7 +80,7 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
     	<li>&check; Check the product price found in the list</li>
      	<li>&check; Check the product picture found in the list</li>
  
- 6. ### Get a product details
+ 5. ### Get a product details by ID
 	In the test I have validated the following field values & checked those features:
  	- &check; Check status code 
  	- &check; Product ID validation
@@ -91,13 +91,13 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
     	<li>&check; Product price validation </li>
      	<li>&check; Product picture validation </li>
 
- 7. ### Get a product photo
+ 6. ### Get a product photo
 	In the test I have validated the following field values & checked those features:
  	- &check; Check status code 
  	- &check; Check response contains a photo or not
  	- &check; Product photo validation
 
- 8. ### Update product details
+ 7. ### Update product details
 	In the test I have validated the following field values & checked those features:
  	- &check; Create data sets using dynamic random variables
   	- &check; Check status code 
@@ -109,12 +109,69 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
     	<li>&check; Product price validation </li>
      	<li>&check; Product picture validation </li>
 
- 9. ### Create a new order
+ 8. ### Create a new order
 	In the test I have validated the following field values & checked those features:
  	- &check; Create data sets using dynamic random variables
-  	- &check; Check status code 
+  	- &check; Check status code is 201 [created]
  	- &check; Product ID validation
  	- &check; Product name validation
  	- &check; Order quantity validation
 	- &check; Buyer ID validation
    	- &check; Buyer name validation
+
+9. ### Get all orders list
+    In the test I have validated the following field values & checked those features:
+  	- &check; Check status code
+	- &check; Check Order ID in the list
+  	- &check; Check order price in the list
+  	- &check; Check order status in the list
+  	- &check; Check order notes in the list
+  	- &check; Check buyer ID in the list
+  	- &check; Check buyer name in the list
+  	- &check; Check buyer mobile no in the list
+  	- &check; Check buyer address in the list
+  	- &check; Check order billing type in the list
+  	- &check; Check order billing status in the list
+  	- &check; Check order discount in the list
+  	- &check; Check order quantity in the list
+  	- &check; Check Product ID in the list
+  	- &check; Check seller ID in the list
+  	- &check; Check seller name in the list   
+
+10. ### Get an order details by ID
+    In the test I have validated the following field values & checked those features:
+  	- &check; Check status code
+	- &check; Check Order ID
+  	- &check; Check order price
+  	- &check; Check order status
+  	- &check; Check order notes
+  	- &check; Check buyer ID
+  	- &check; Check buyer name
+  	- &check; Check buyer mobile no
+  	- &check; Check buyer address
+  	- &check; Check order billing type
+  	- &check; Check order billing status
+  	- &check; Check order discount
+  	- &check; Check order quantity
+  	- &check; Check Product ID
+  	- &check; Check seller ID
+  	- &check; Check seller name    
+
+11. ### Update order details by ID
+    In the test I have validated the following field values & checked those features:
+  	- &check; Check status code
+	- &check; Check order status changed or not
+	- &check; Check order quantity changed or not 
+
+12. ### Delete a product
+    In the test I have validated the following field values & checked those features:
+  	- &check; Check status code
+
+13. ### Logout
+    In the test I have validated the following field values & checked those features:
+  	- &check; Check status code is 204 [Not Found]
+
+## Conclusion & More
+In this API test project, I have tested all the API routes & performed effective tests. To learn more about APIs & HTTP requests you can read my blogs/posts:
+- [Understanding API Concepts](https://ahmedmanan.com/blog/understanding-api-concepts/)
+- [HTTP Fundamentals](https://ahmedmanan.com/blog/http-fundamentals/)
