@@ -67,7 +67,7 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
  	- &check; Product quantity validation
  	- &check; Product name validation
 	- &check; Store dataset in the environment
- 3. ### Get all Products
+ 3. ### Get all products
 	In the test I have validated the following field values & checked those features:
      	- &check; Check status code 
  	- &check; Check the product ID found in the list
@@ -77,3 +77,13 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
    	- &check; Check the product quantity found in the list
     	<li>&check; Check the product price found in the list</li>
      	<li>&check; Check the product picture found in the list</li>
+ 3. ### Get a product details
+	In the test I have validated the following field values & checked those features:
+     	- &check; Check status code 
+ 	- &check; Product ID validation
+ 	- &check; Product name validation
+ 	- &check; product description validation
+	- &check; Product category validation
+   	- &check; Product quantity validation
+    	<li>&check; Product price validation </li>
+     	<li>&check; Product picture validation </li>
