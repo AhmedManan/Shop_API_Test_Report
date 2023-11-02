@@ -87,3 +87,18 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
    	- &check; Product quantity validation
     	<li>&check; Product price validation </li>
      	<li>&check; Product picture validation </li>
+4. ### Get a product photo
+	In the test I have validated the following field values & checked those features:
+    	<li>&check; Check status code </li>
+   	<li>&check; Check response contains a photo or not </li>
+     	<li>&check; Product photo validation </li>
+5. ### Update a product
+	In the test I have validated the following field values & checked those features:
+     	<li>&check; Check status code </li>
+ 	<li> &check; Product ID validation </li>
+ 	<li> &check; Product name validation </li>
+ 	<li> &check; product description validation </li>
+	<li> &check; Product category validation </li>
+   	<li> &check; Product quantity validation </li>
+    	<li>&check; Product price validation </li>
+     	<li>&check; Product picture validation </li>
