@@ -118,5 +118,3 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
  	- &check; Order quantity validation
 	- &check; Buyer ID validation
    	- &check; Buyer name validation
-
-
