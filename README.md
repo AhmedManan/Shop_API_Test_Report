@@ -59,6 +59,7 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
  	- &check; Password
  	- &check; Generate token
  	- &check; Check status code
+
 3. ### Create A Product
 	In the test I have validated the following field values & checked those features:
  	- &check; Create data sets using dynamic random variables
@@ -67,9 +68,10 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
  	- &check; Product quantity validation
  	- &check; Product name validation
 	- &check; Store dataset in the environment
- 3. ### Get all products
+ 
+ 4. ### Get all products
 	In the test I have validated the following field values & checked those features:
-     	- &check; Check status code 
+ 	- &check; Check status code 
  	- &check; Check the product ID found in the list
  	- &check; Check the product name found in the list
  	- &check; Check the product description found in the list
@@ -77,9 +79,10 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
    	- &check; Check the product quantity found in the list
     	<li>&check; Check the product price found in the list</li>
      	<li>&check; Check the product picture found in the list</li>
- 3. ### Get a product details
+ 
+ 6. ### Get a product details
 	In the test I have validated the following field values & checked those features:
-     	- &check; Check status code 
+ 	- &check; Check status code 
  	- &check; Product ID validation
  	- &check; Product name validation
  	- &check; product description validation
@@ -87,18 +90,33 @@ Total Number of Test Scripts 78 and a Total of 237 Assertions were done. All of 
    	- &check; Product quantity validation
     	<li>&check; Product price validation </li>
      	<li>&check; Product picture validation </li>
-4. ### Get a product photo
+
+ 7. ### Get a product photo
 	In the test I have validated the following field values & checked those features:
-    	<li>&check; Check status code </li>
-   	<li>&check; Check response contains a photo or not </li>
-     	<li>&check; Product photo validation </li>
-5. ### Update a product
+ 	- &check; Check status code 
+ 	- &check; Check response contains a photo or not
+ 	- &check; Product photo validation
+
+ 8. ### Update product details
 	In the test I have validated the following field values & checked those features:
-     	<li>&check; Check status code </li>
- 	<li> &check; Product ID validation </li>
- 	<li> &check; Product name validation </li>
- 	<li> &check; product description validation </li>
-	<li> &check; Product category validation </li>
-   	<li> &check; Product quantity validation </li>
+ 	- &check; Create data sets using dynamic random variables
+  	- &check; Check status code 
+ 	- &check; Product ID validation
+ 	- &check; Product name validation
+ 	- &check; product description validation
+	- &check; Product category validation
+   	- &check; Product quantity validation
     	<li>&check; Product price validation </li>
      	<li>&check; Product picture validation </li>
+
+ 9. ### Create a new order
+	In the test I have validated the following field values & checked those features:
+ 	- &check; Create data sets using dynamic random variables
+  	- &check; Check status code 
+ 	- &check; Product ID validation
+ 	- &check; Product name validation
+ 	- &check; Order quantity validation
+	- &check; Buyer ID validation
+   	- &check; Buyer name validation
+
+
