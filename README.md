@@ -36,7 +36,7 @@ npm install -g newman
 npm install -g newman-reporter-htmlextra
 ```
 ## Live API Test Report:
-- https://shop-api.ahmedmanan.com/report
+- https://ahmedmanan.com/api_report
 
 ## API Documentation:
 - [https://documenter.getpostman.com/view/13082503/2s93Xwz4Az](https://documenter.getpostman.com/view/23708981/2s9YRGy9ao)
